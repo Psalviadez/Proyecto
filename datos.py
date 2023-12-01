@@ -16,7 +16,8 @@ class datos(db.Model):
     
     #Metodo constructor para mapear datos alos campos definidos
     
-    def __init__(self, latitud, longitud, nombre, direccion):
+    def __init__(self, latitud, longitud, nombre, 
+                 direccion):
         self.latitud=latitud
         self.longitud=longitud
         self.nombre=nombre
