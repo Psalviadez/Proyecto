@@ -9,14 +9,16 @@ class datos(db.Model):
     
     #llave primaria 
     id=db.Column(db.Integer , primary_key=True)
-    coordenadas=db.Column(db.Float(100))
+    latitud=db.Column(db.Float(100))
+    longitud=db.Column(db.Float(100))
     nombre=db.Column(db.String(30))
     direccion=db.Column(db.String(30))
     
     #Metodo constructor para mapear datos alos campos definidos
     
-    def __init__(self, coordenadas, nombre,direccion):
-        self.coordenadas=coordenadas
+    def __init__(self, latitud,longitud, nombre,direccion):
+        self.latitud=latitud
+        self.longitud=longitud
         self.nombre=nombre
         self.direccion=direccion
     

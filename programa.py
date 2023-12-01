@@ -14,7 +14,7 @@ class programa:
         db.init_app(self.app)    
     
 
-        self.app.add_url_rule("/" , view_func=self.todoslosdatos)
+        self.app.add_url_rule("/" , view_func=self.mapa)
         self.app.add_url_rule("/nuevo" , view_func=self.agregar, methods=["GET", "POST"])
         
         #Iniciar el servidor 
@@ -22,24 +22,25 @@ class programa:
             db.create_all()
         self.app.run(debug=True)
         
-    def todoslosdatos(self):
-        return "Busacar"
+    def mapa(self):
+        return render_template("mapa.html",barberias=datos.query.all())
         
     def agregar(self):
         #verificar si debe enviar el formulario o procesar los datos
         if request.method=="POST":
             #crear un objeto de la clase Localizacion con los valores  del fotmulario
-            coordenadas=request.form["coordenadas"]
+            latitud=request.form["latitud"]
+            longitud=request.form["longitud"]
             nombre=request.form["nombre"]
             direccion=request.form["direccion"]
             
-            los_datos=datos(coordenadas,nombre,direccion)
+            los_datos=datos(latitud,longitud,nombre,direccion)
             
             #guardar el objeto en la db
             
             db.session.add(los_datos)
             db.session.commit()
-            return redirect(url_for("todoslosdatos"))
+            return redirect(url_for("mapa"))
             
         
         
